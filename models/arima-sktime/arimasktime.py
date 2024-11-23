@@ -458,15 +458,12 @@ def plot_forecast(forecast: pd.Series, actual_river_levels: pd.Series = None, da
     plt.figure(figsize=(12, 6))
 
     # Determine the start date for plotting
-    if actual_river_levels is not None:
-        if len(actual_river_levels) < days_before_forecast:
-            start_plot_date = actual_river_levels.index[0]
-        else:
-            start_plot_date = actual_river_levels.index[-days_before_forecast]
+    if actual_river_levels is not None and not actual_river_levels.empty:
+        start_plot_date = actual_river_levels.index[0]
         
         # Plot actual river levels
         plt.plot(
-            actual_river_levels.loc[start_plot_date:].index, actual_river_levels.loc[start_plot_date:],
+            actual_river_levels.index, actual_river_levels,
             label='Actual River Levels', color='blue'
         )
     else:
@@ -481,7 +478,7 @@ def plot_forecast(forecast: pd.Series, actual_river_levels: pd.Series = None, da
 
     # Formatting the dates on the x-axis
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=2))
+    plt.gca().xaxis.set_major_locator(mdates.AutoDateLocator())
     plt.xticks(rotation=45)
 
     # Adding titles and labels
