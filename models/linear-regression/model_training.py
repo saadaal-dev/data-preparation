@@ -1,4 +1,5 @@
 # Imports
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -7,11 +8,21 @@ from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.decomposition import PCA
 import joblib
 
-station_jowhar_river_level_df = pd.read_csv('data/Jowhar_river_station.csv', parse_dates=['date'], date_format="%d/%m/%Y")
-rainfall_ethiopia_gabredarre_df = pd.read_csv('data/Ethiopia_Gabredarre_Fafen_river_midpoint_historical_weather_daily_2024-11-19.csv', parse_dates=['date'], date_format="%Y-%m-%d %H:%M:%S+00:00")
-rainfall_ethiopia_gode_df = pd.read_csv('data/Ethiopia_Gode_city_historical_weather_daily_2024-11-19.csv', parse_dates=['date'], date_format="%Y-%m-%d %H:%M:%S+00:00")
-rainfall_ethiopia_haren_df = pd.read_csv('data/Ethiopia_Haren_Fafen_river_source_historical_weather_daily_2024-11-19.csv', parse_dates=['date'], date_format="%Y-%m-%d %H:%M:%S+00:00")
-rainfall_jowhar_df = pd.read_csv('data/historical_weather_daily_2024-11-12.csv', parse_dates=['date'], date_format="%Y-%m-%d %H:%M:%S+00:00")
+DATA_PATH= "static-data/linear-regression"
+
+file_paths = [f'{DATA_PATH}/Jowhar_river_station.csv', f'{DATA_PATH}/Ethiopia_Gabredarre_Fafen_river_midpoint_historical_weather_daily_2024-11-19.csv', f'{DATA_PATH}/Ethiopia_Gode_city_historical_weather_daily_2024-11-19.csv', f'{DATA_PATH}/Ethiopia_Gode_city_historical_weather_daily_2024-11-19.csv', f'{DATA_PATH}/Ethiopia_Haren_Fafen_river_source_historical_weather_daily_2024-11-19.csv',f'{DATA_PATH}/historical_weather_daily_2024-11-12.csv'] 
+for file_path in file_paths:
+    if os.path.exists(file_path):
+        station_jowhar_river_level_df = pd.read_csv(file_path, parse_dates=['date'], date_format="%d/%m/%Y")
+        print(f"{file_path} file loaded successfully.")
+    else:
+        print(f"File not found: {file_path}")
+
+station_jowhar_river_level_df = pd.read_csv(f'{DATA_PATH}/Jowhar_river_station.csv', parse_dates=['date'], date_format="%d/%m/%Y")
+rainfall_ethiopia_gabredarre_df = pd.read_csv(f'{DATA_PATH}/Ethiopia_Gabredarre_Fafen_river_midpoint_historical_weather_daily_2024-11-19.csv', parse_dates=['date'], date_format="%Y-%m-%d %H:%M:%S+00:00")
+rainfall_ethiopia_gode_df = pd.read_csv(f'{DATA_PATH}/Ethiopia_Gode_city_historical_weather_daily_2024-11-19.csv', parse_dates=['date'], date_format="%Y-%m-%d %H:%M:%S+00:00")
+rainfall_ethiopia_haren_df = pd.read_csv(f'{DATA_PATH}/Ethiopia_Haren_Fafen_river_source_historical_weather_daily_2024-11-19.csv', parse_dates=['date'], date_format="%Y-%m-%d %H:%M:%S+00:00")
+rainfall_jowhar_df = pd.read_csv(f'{DATA_PATH}/historical_weather_daily_2024-11-12.csv', parse_dates=['date'], date_format="%Y-%m-%d %H:%M:%S+00:00")
 rainfall_jowhar_df = rainfall_jowhar_df.drop(columns=['Unnamed: 0'])
 rainfall_ethiopia_haren_df = rainfall_ethiopia_haren_df.drop(columns=['Unnamed: 0'])
 rainfall_ethiopia_gabredarre_df = rainfall_ethiopia_gabredarre_df.drop(columns=['Unnamed: 0'])
