@@ -8,6 +8,8 @@ This forcasting method uses Linear Regression for its prediction. Using differen
 
 The source data to train the model is based on the historical weather data (precipitation) in three different weather stations in Ethiopia, near tributaries of the Shebelle river, the historical weather on the Jowhar region, and the historical sensored data of the river level in Jowhar station.
 
+As of now (on the 21st of November 2024), only static data in the `static-data/linear-regression` folder are used. If a need to train on other data is required, either an data fetching process has to be implemented or the static data has to be manually updated. 
+
 ## Rain data
 The locations of the weather stations for the precipitation data are:
 - Harar city - Fafen river source (East Ethiopia), merging into Shebelle river. (Latitude: 9.312932684554212, Longitude: 42.12141724519376)
@@ -24,14 +26,14 @@ This model uses 2 main concepts to modelize the river level behavior:
 
 It is important to note that this model can be enriched and fine tuned. However, it is usable as it is.
 ## Run
-To run the training, please ensure you have the correct csv files in the `data` folder, place yourself at the same level as this README and run:
+To run the training, please ensure you have the correct csv files in the `data` folder, place yourself at repository root level and run:
 ```bash
-python3 model_training.py 
+python3 models/linear-regression/model_training.py 
 ```
 # Inference
 
 The prerequisite is to have the libraries in the `requirements.txt` installed.
-To run the inference, please ensure you filled the `inference_inputs.csv` fill with your inputs, place yourself at the same level as this README and run:
+To run the inference, please ensure you filled the `inference_inputs.csv` fill with your inputs, place yourself at repository root level and run:
 ```bash
-python3 model_inference.py
+python3 models/linear-regression/model_inference.py
 ```
