@@ -1,0 +1,5 @@
+# Direct dependencies only. Regenerate lockfile with:
+#   uv pip compile requirements.in -o requirements.txt --python-version 3.12
+click>=8.1
+pandas>=2.1  # 2.1+ required for Python 3.12 wheel support
+prophet>=1.1
